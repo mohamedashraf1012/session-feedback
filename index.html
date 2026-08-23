@@ -241,6 +241,65 @@
     }
     textarea { min-height: 90px; }
 
+    /* OPTIONAL TEXT */
+    .optional-toggle {
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--green-mid);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      user-select: none;
+      font-weight: 600;
+    }
+    .optional-toggle:hover { text-decoration: underline; }
+    .optional-box {
+      display: none;
+      margin-top: 8px;
+    }
+    .optional-box textarea {
+      min-height: 70px;
+    }
+
+    /* FOOTER */
+    .footer {
+      background: var(--ink);
+      color: rgba(255,255,255,0.75);
+      text-align: center;
+      padding: 28px 20px;
+      margin-top: 10px;
+    }
+    .footer p { font-size: 13px; margin-bottom: 14px; line-height: 1.6; }
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.15s, opacity 0.15s;
+      color: white;
+    }
+    .social-link:hover { transform: translateY(-2px); opacity: 0.9; }
+    .social-link.linkedin { background: #0A66C2; }
+    .social-link.github   { background: #333; }
+    .social-link.gmail    { background: #EA4335; }
+    .social-link.whatsapp { background: #25D366; }
+    .footer-credit {
+      font-size: 11px;
+      color: rgba(255,255,255,0.35);
+      margin-top: 16px;
+    }
+
     /* SUBMIT */
     .submit-wrap {
       text-align: center;
@@ -336,6 +395,10 @@
           <input type="radio" name="overall" id="s1" value="1"/><label for="s1">★</label>
         </div>
         <div class="star-labels"><span>Poor ضعيف</span><span>Excellent ممتاز</span></div>
+        <span class="optional-toggle" onclick="toggleOptional('opt-overall')">✏️ إضافة تعليق (اختياري) | Add comment</span>
+        <div class="optional-box" id="opt-overall">
+          <textarea name="overall_comment" placeholder="اكتب تعليقك هنا... / Write your comment here..."></textarea>
+        </div>
       </div>
 
       <div class="divider"></div>
@@ -352,6 +415,10 @@
           <input type="radio" name="content" id="c2" value="2"/><label for="c2">★</label>
           <input type="radio" name="content" id="c1" value="1"/><label for="c1">★</label>
         </div>
+        <span class="optional-toggle" onclick="toggleOptional('opt-content')">✏️ إضافة تعليق (اختياري) | Add comment</span>
+        <div class="optional-box" id="opt-content">
+          <textarea name="content_comment" placeholder="اكتب تعليقك هنا... / Write your comment here..."></textarea>
+        </div>
       </div>
 
       <div class="divider"></div>
@@ -367,6 +434,10 @@
           <input type="radio" name="style" id="st3" value="3"/><label for="st3">★</label>
           <input type="radio" name="style" id="st2" value="2"/><label for="st2">★</label>
           <input type="radio" name="style" id="st1" value="1"/><label for="st1">★</label>
+        </div>
+        <span class="optional-toggle" onclick="toggleOptional('opt-style')">✏️ إضافة تعليق (اختياري) | Add comment</span>
+        <div class="optional-box" id="opt-style">
+          <textarea name="style_comment" placeholder="اكتب تعليقك هنا... / Write your comment here..."></textarea>
         </div>
       </div>
 
@@ -427,6 +498,10 @@
           <label class="option"><input type="radio" name="difficulty" value="slightly_hard"/> <span>صعب شوية – Slightly Difficult</span></label>
           <label class="option"><input type="radio" name="difficulty" value="too_hard"/> <span>صعب جداً – Too Difficult</span></label>
         </div>
+        <span class="optional-toggle" onclick="toggleOptional('opt-difficulty')">✏️ إضافة تعليق (اختياري) | Add comment</span>
+        <div class="optional-box" id="opt-difficulty">
+          <textarea name="difficulty_comment" placeholder="اكتب تعليقك هنا... / Write your comment here..."></textarea>
+        </div>
       </div>
 
     </div>
@@ -454,6 +529,10 @@
           <label class="option"><input type="radio" name="pace" value="fast"/> <span>سريع شوية – A bit Fast</span></label>
           <label class="option"><input type="radio" name="pace" value="too_fast"/> <span>سريع جداً – Too Fast</span></label>
         </div>
+        <span class="optional-toggle" onclick="toggleOptional('opt-pace')">✏️ إضافة تعليق (اختياري) | Add comment</span>
+        <div class="optional-box" id="opt-pace">
+          <textarea name="pace_comment" placeholder="اكتب تعليقك هنا... / Write your comment here..."></textarea>
+        </div>
       </div>
 
       <div class="divider"></div>
@@ -467,6 +546,10 @@
           <label class="option"><input type="radio" name="examples" value="yes_enough"/> <span>أيوه، كفاية – Yes, enough</span></label>
           <label class="option"><input type="radio" name="examples" value="need_more"/> <span>محتاج أمثلة أكتر – Need more examples</span></label>
           <label class="option"><input type="radio" name="examples" value="too_many"/> <span>كانت كتير شوية – A bit too many</span></label>
+        </div>
+        <span class="optional-toggle" onclick="toggleOptional('opt-examples')">✏️ إضافة تعليق (اختياري) | Add comment</span>
+        <div class="optional-box" id="opt-examples">
+          <textarea name="examples_comment" placeholder="اكتب تعليقك هنا... / Write your comment here..."></textarea>
         </div>
       </div>
 
@@ -537,7 +620,40 @@
 
 </div><!-- /form-wrap -->
 
+<!-- FOOTER -->
+<div class="footer">
+  <p>
+    للتواصل مع المدرب | Contact the Instructor<br/>
+    <strong>Mohamed Ashraf</strong> – Technical Instructor
+  </p>
+  <div class="social-links">
+    <a class="social-link linkedin" href="https://www.linkedin.com/in/mohamedashraf1012" target="_blank">
+      🔗 LinkedIn
+    </a>
+    <a class="social-link github" href="https://github.com/mohamedashraf1012" target="_blank">
+      🐙 GitHub
+    </a>
+    <a class="social-link gmail" href="mailto:m.ashraf2002.ma@gmail.com">
+      ✉️ Gmail
+    </a>
+    <a class="social-link whatsapp" href="https://wa.me/201007372367" target="_blank">
+      💬 WhatsApp
+    </a>
+  </div>
+  <div class="footer-credit">Technical for Non-Techies · Day 1 · 2026</div>
+</div>
+
 <script>
+  function toggleOptional(id) {
+    const box = document.getElementById(id);
+    const isOpen = box.style.display === 'block';
+    box.style.display = isOpen ? 'none' : 'block';
+    const toggle = box.previousElementSibling;
+    toggle.textContent = isOpen
+      ? '✏️ إضافة تعليق (اختياري) | Add comment'
+      : '✖️ إخفاء التعليق | Hide comment';
+  }
+
   document.getElementById('feedbackForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
